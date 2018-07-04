@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<title>Employee Registration</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+</head>
+<body>
+<div>
+	<div>
+		<div>
+			<h3>Employee Registration</h3>
+		</div>
+		<form action="#" th:action="@{/employee/add}" th:object="${employee}" method="post">
+			<div>
+				<div>
+					<label>First Name:</label>
+					<div><input type="text" th:field="*{firstName}" /></div>
+				</div>
+				<div>
+					<label>Last Name:</label>
+					<div class="col-md-9"><input type="text" th:field="*{lastName}" /></div>
+				</div>
+				<div>
+					<label>E-Mail:</label>
+					<div class="col-md-9"><input type="text" th:field="*{email}" /></div>
+				</div>
+				<div>
+					<div>
+						<button type="submit">Save</button>
+						<div th:if="${message}" th:text="${message}"></div>
+					</div>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>
+</body>
+</html>

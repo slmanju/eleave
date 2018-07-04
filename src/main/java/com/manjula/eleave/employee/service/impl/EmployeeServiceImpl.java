@@ -29,9 +29,19 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
+    public void update(EmployeeView employee) {
+        employeeRepository.save(Employee.valueOf(employee));
+    }
+
+    @Override
     public EmployeeView findById(String id) {
         Optional<Employee> employee = employeeRepository.findById(id);
         return employee.map(Employee::view).orElse(null);
+    }
+
+    @Override
+    public void delete(String id) {
+        employeeRepository.deleteById(id);
     }
 
     @Autowired

@@ -48,11 +48,10 @@ public class EmployeeController {
     
     @PostMapping(value = "/update")
     public String update(EmployeeView employee, ModelMap modelMap) {
-//        employeeService.update(user);
-        EmployeeView employeeView = employeeService.findById(employee.getId());
-        modelMap.addAttribute("employee", employeeView);
-        modelMap.addAttribute("message", "User Updated");
-        return "employee/user-update";
+        employeeService.update(employee);
+        modelMap.addAttribute("employee", employee);
+        modelMap.addAttribute("message", "Employee Updated");
+        return "employee/employee-update";
     }
     
     @GetMapping(value = "/view")
@@ -60,6 +59,12 @@ public class EmployeeController {
         EmployeeView employeeView = employeeService.findById(id);
         modelMap.addAttribute("employee", employeeView);
         return "employee/employee-view";
+    }
+
+    @GetMapping(value = "/delete")
+    public String delete(@RequestParam String id, ModelMap modelMap) {
+        employeeService.delete(id);
+        return "redirect:/employee";
     }
 
     @Autowired

@@ -1,4 +1,4 @@
-package com.manjula.eleave.config;
+package com.manjula.eleave;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

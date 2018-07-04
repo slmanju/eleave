@@ -1,4 +1,4 @@
-package com.manjula.eleave.config;
+package com.manjula.eleave;
 
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
