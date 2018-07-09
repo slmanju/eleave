@@ -14,6 +14,11 @@
 			<div class="panel-body">
 				<form action="#" th:action="@{/employee/update}" th:object="${employee}" method="post">
 					<input type="hidden" name="id" th:value="${employee.id}" />
+                    <div class="alert alert-danger" th:if="${#fields.hasErrors('*')}">
+                        <ul>
+                            <ol th:each="err : ${#fields.errors('*')}" th:text="${err}"></ol>
+                        </ul>
+                    </div>
 					<div class="form-group">
                         <label class="col-md-3 control-label">First Name:</label>
                         <div class="col-md-9"><input type="text" th:field="*{firstName}" class="form-control"/></div>
@@ -26,9 +31,28 @@
 	                    <label class="col-md-3 control-label">E-Mail:</label>
 	                    <div class="col-md-9"><input type="text" th:field="*{email}" class="form-control"/></div>
 	                </div>
+					<div>
+						<div>
+							<select class="form-control" th:field="*{jobPosition}">
+								<option th:each="jobPosition : ${T(com.manjula.eleave.employee.model.JobPosition).values()}"
+										th:value="${jobPosition}"
+										th:text="${jobPosition}">
+							</select>
+						</div>
+					</div>
+					<div>
+						<div>
+							<select class="form-control" th:field="*{role}">
+								<option th:each="role : ${T(com.manjula.eleave.employee.model.Role).values()}"
+										th:value="${role}"
+										th:text="${role}">
+							</select>
+						</div>
+					</div>
 					<div class="form-group">
 						<div class="col-sm-offset-2 col-sm-10">
 							<button type="submit" class="btn btn-success btn-sm">Update</button>
+                            <div th:if="${message}" th:text="${message}"></div>
 						</div>
 					</div>
 				</form>

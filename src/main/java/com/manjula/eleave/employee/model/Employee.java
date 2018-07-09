@@ -28,6 +28,12 @@ public class Employee {
     private String lastName;
     @Column(name = "email")
     private String email;
+    @Column(name = "job_position")
+    @Enumerated(EnumType.STRING)
+    private JobPosition jobPosition;
+    @Column(name = "employee_type")
+    @Enumerated(EnumType.STRING)
+    private Role role;
     
     public static Employee valueOf(EmployeeView view) {
         Employee employee = new Employee();

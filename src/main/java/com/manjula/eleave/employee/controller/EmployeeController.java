@@ -5,11 +5,10 @@ import com.manjula.eleave.employee.view.EmployeeView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @Controller
@@ -32,10 +31,15 @@ public class EmployeeController {
     }
 
     @PostMapping(value = "/add")
-    public String add(EmployeeView employee, ModelMap modelMap) {
-        employeeService.save(employee);
+    public String add(@Valid @ModelAttribute("employee") EmployeeView employee, BindingResult result, ModelMap modelMap) {
+        if (result.hasErrors()) {
+            // do something later
+            modelMap.addAttribute("message", "Fix the errors");
+        } else {
+            employeeService.save(employee);
+            modelMap.addAttribute("message", "Employee Added");
+        }
         modelMap.addAttribute("employee", employee);
-        modelMap.addAttribute("message", "Employee Added");
         return "employee/employee-add";
     }
     
@@ -47,10 +51,14 @@ public class EmployeeController {
     }
     
     @PostMapping(value = "/update")
-    public String update(EmployeeView employee, ModelMap modelMap) {
-        employeeService.update(employee);
+    public String update(@Valid @ModelAttribute("employee") EmployeeView employee, BindingResult result, ModelMap modelMap) {
+        if (result.hasErrors()) {
+            modelMap.addAttribute("message", "Fix the errors");
+        } else {
+            employeeService.update(employee);
+            modelMap.addAttribute("message", "Employee Updated");
+        }
         modelMap.addAttribute("employee", employee);
-        modelMap.addAttribute("message", "Employee Updated");
         return "employee/employee-update";
     }
     
