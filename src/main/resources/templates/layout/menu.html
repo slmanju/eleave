@@ -1,0 +1,14 @@
+<nav class="navbar navbar-inverse navbar-fixed-top" th:fragment="menu">
+	<div class="container-fluid">
+		<div class="navbar-header">
+			<a class="navbar-brand" href="#">eLeave</a>
+		</div>
+		<ul class="nav navbar-nav">
+			<li class="active"><a th:href="@{/user}">User</a></li>
+			<li><a th:href="@{/role}">Role</a></li>
+			<li><a th:href="@{/leave}">Leave Summary</a></li>
+			<li><a th:href="@{/leave/request}">Leave</a></li>
+			<li><a th:href="@{/leave/pending}">Pending</a></li>
+		</ul>
+	</div>
+</nav>

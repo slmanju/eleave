@@ -1,0 +1,70 @@
+// Create database
+ext {
+    DB_MYSQL_DRIVER = "com.mysql.jdbc.Driver"
+    DB_MYSQL_URL = "jdbc:mysql://localhost:3306"
+    DB_MYSQL_ROOT = "root"
+    DB_MYSQL_ROOT_PASSWORD = "root"
+    DB_MYSQL_USER = "eleave"
+    DB_MYSQL_USER_URL = DB_MYSQL_URL + "/" + DB_MYSQL_USER
+}
+
+task db {
+    group "Database Setup"
+    description "Create database and tables. Insert master data. Insert test data."
+    doLast {
+        tasks.initDb.execute()
+        /*tasks.initMasterData.execute()*/
+        tasks.initTestData.execute()
+    }
+}
+
+task cleanDb {
+    group "Database Setup"
+    description "Create database and tables. Insert master data."
+    doLast {
+        tasks.initDb.execute()
+        tasks.initMasterData.execute()
+    }
+}
+
+task initDb {
+    group "Database Setup"
+    description "Create tables."
+    doLast {
+        def tempFile = "build/tmp/db/create-database.sql"
+        ant.copy(file: "db-scripts/create-database.sql", tofile: tempFile)
+        runSql(DB_MYSQL_DRIVER, DB_MYSQL_URL, DB_MYSQL_ROOT, DB_MYSQL_ROOT_PASSWORD, tempFile)
+    }
+}
+
+task initMasterData {
+    group "Database Setup"
+    description "Create master data in database."
+    doLast {
+        def FILE = "db-scripts/master_data.sql"
+        runSql(DB_MYSQL_DRIVER, DB_MYSQL_USER_URL, DB_MYSQL_ROOT, DB_MYSQL_ROOT_PASSWORD, FILE)
+    }
+}
+
+task initTestData {
+    group "Database Setup"
+    description "Create test data in database."
+    doLast {
+        def FILE = "db-scripts/test_data.sql"
+        runSql(DB_MYSQL_DRIVER, DB_MYSQL_USER_URL, DB_MYSQL_ROOT, DB_MYSQL_ROOT_PASSWORD, FILE)
+    }
+}
+
+def runSql(driver, url, user, password, file) {
+    ant.sql(driver: driver,
+            url: url,
+            userid: user,
+            password: password,
+            encoding: "UTF-8",
+            classpath: configurations.compile.asPath,
+            onerror: "continue") {
+        fileset(file: file)
+    }
+}
+// Create database end
+
