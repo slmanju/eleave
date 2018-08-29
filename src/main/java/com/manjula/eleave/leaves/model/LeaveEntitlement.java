@@ -12,7 +12,7 @@ import org.springframework.beans.BeanUtils;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "leave_entitlement")
+@Table(name = "el_leave_entitlement")
 @Data @NoArgsConstructor @AllArgsConstructor @Builder
 public class LeaveEntitlement {
 
@@ -25,6 +25,7 @@ public class LeaveEntitlement {
     @JoinColumn(name = "employee_id")
     private Employee employee;
     @Column(name = "leave_type")
+    @Enumerated(EnumType.STRING)
     private LeaveType leaveType;
     @Column(name = "year")
     private int year;

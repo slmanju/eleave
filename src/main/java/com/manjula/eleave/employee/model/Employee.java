@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Entity
-@Table(name = "employee")
+@Table(name = "el_employee")
 @Data @NoArgsConstructor @AllArgsConstructor @Builder
 public class Employee {
 

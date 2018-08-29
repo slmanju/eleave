@@ -15,7 +15,7 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(name = "leave")
+@Table(name = "el_leave")
 @Data @NoArgsConstructor @AllArgsConstructor  @Builder
 public class Leave {
 
@@ -29,6 +29,7 @@ public class Leave {
     @JoinColumn(name = "employee_id")
     private Employee employee;
     @Column(name = "leave_type")
+    @Enumerated(EnumType.STRING)
     private LeaveType type;
     @Column(name = "from_date")
     @Temporal(TemporalType.DATE)

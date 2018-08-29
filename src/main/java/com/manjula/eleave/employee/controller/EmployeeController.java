@@ -37,7 +37,7 @@ public class EmployeeController {
             modelMap.addAttribute("message", "Fix the errors");
         } else {
             employeeService.save(employee);
-            modelMap.addAttribute("message", "Employee Added");
+            modelMap.addAttribute("message", "Leave Added");
         }
         modelMap.addAttribute("employee", employee);
         return "employee/employee-add";
@@ -56,7 +56,7 @@ public class EmployeeController {
             modelMap.addAttribute("message", "Fix the errors");
         } else {
             employeeService.update(employee);
-            modelMap.addAttribute("message", "Employee Updated");
+            modelMap.addAttribute("message", "Leave Updated");
         }
         modelMap.addAttribute("employee", employee);
         return "employee/employee-update";

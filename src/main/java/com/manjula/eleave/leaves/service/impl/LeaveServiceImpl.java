@@ -49,7 +49,7 @@ public class LeaveServiceImpl implements LeaveService {
 
     @Override
     public List<LeaveView> getAllLeavesFor(String employeeId) {
-        List<Leave> leaves = leaveRepository.findAllByEmployee(employeeId);
+        List<Leave> leaves = leaveRepository.findAllByEmployeeId(employeeId);
         List<LeaveView> views = new ArrayList<>();
         for (Leave leave : leaves) {
             views.add(leave.view());
@@ -59,7 +59,7 @@ public class LeaveServiceImpl implements LeaveService {
 
     @Override
     public List<LeaveView> getAllLeavesFor(String employeeId, LeaveStatus status) {
-        List<Leave> leaves = leaveRepository.findAllByEmployee(employeeId);
+        List<Leave> leaves = leaveRepository.findAllByEmployeeId(employeeId);
         List<LeaveView> views = new ArrayList<>();
         for (Leave leave : leaves) {
             views.add(leave.view());
@@ -69,7 +69,7 @@ public class LeaveServiceImpl implements LeaveService {
 
     @Override
     public List<LeaveView> getAllPendingLeaves() {
-        List<Leave> leaves = leaveRepository.findAllPendingLeaves();
+        List<Leave> leaves = leaveRepository.findAllByStatus(LeaveStatus.PENDING);
         List<LeaveView> views = new ArrayList<>();
         for (Leave leave : leaves) {
             views.add(leave.view());

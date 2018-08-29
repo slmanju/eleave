@@ -1,6 +1,7 @@
 package com.manjula.eleave.leaves.repository;
 
 import com.manjula.eleave.leaves.model.Leave;
+import com.manjula.eleave.leaves.model.LeaveStatus;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -15,9 +16,9 @@ public interface LeaveRepository extends JpaRepository<Leave, String> {
             "join fetch leave.employee employee " +
             "join fetch employee.role " +
             "WHERE leave.employee.id = :employeeId")
-    List<Leave> findAllByEmployee(@Param("employeeId") String employeeId);
+    List<Leave> findAllByEmployeeId(@Param("employeeId") String employeeId);
 
-    @Query(name = "SELECT leave FROM Leave leave WHERE leave.status = 'PENDING'")
-    List<Leave> findAllPendingLeaves();
+    @Query(name = "SELECT leave FROM Leave leave WHERE leave.status = :status")
+    List<Leave> findAllByStatus(@Param("status") LeaveStatus status);
 
 }

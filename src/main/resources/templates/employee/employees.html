@@ -7,10 +7,10 @@
 </head>
 <body>
 	<div>
-		<div th:if="${employees} != null">
+		<div th:if="${leaves} != null">
 			<div>
 				<h3><b>Users</b>
-				    <a th:href="@{/employee/add}">Add</a>
+				    <a th:href="@{/leave/add}">Add</a>
 				</h3>
 			</div>
 			<table>
@@ -20,17 +20,17 @@
 					<th>E-Mail</th>
 					<th>Action</th>
 				</tr>
-				<tr th:each="employee : ${employees}" th:if="${not #lists.isEmpty(employees)}">
-					<td th:text="${employee.firstName}"></td>
-					<td th:text="${employee.lastName}"></td>
-					<td th:text="${employee.email}"></td>
+				<tr th:each="leave : ${leaves}" th:if="${not #lists.isEmpty(leaves)}">
+					<td th:text="${leave.firstName}"></td>
+					<td th:text="${leave.lastName}"></td>
+					<td th:text="${leave.email}"></td>
 					<td>
-						<a th:href="@{/employee/view(id=${employee.id})}">View</a>
-						<a th:href="@{/employee/update(id=${employee.id})}">Edit</a>
-						<a th:href="@{/employee/delete(id=${employee.id})}">Delete</a>
+						<a th:href="@{/leave/view(id=${leave.id})}">View</a>
+						<a th:href="@{/leave/update(id=${leave.id})}">Edit</a>
+						<a th:href="@{/leave/delete(id=${leave.id})}">Delete</a>
 					</td>
 				</tr>
-				<tr th:if="${#lists.isEmpty(employees)}">
+				<tr th:if="${#lists.isEmpty(leaves)}">
 					<td colspan="3">No result found</td>
 				</tr>
 			</table>

@@ -12,8 +12,8 @@
 				<h3 class="panel-title">Employee Update</h3>
 			</div>
 			<div class="panel-body">
-				<form action="#" th:action="@{/employee/update}" th:object="${employee}" method="post">
-					<input type="hidden" name="id" th:value="${employee.id}" />
+				<form action="#" th:action="@{/leave/update}" th:object="${leave}" method="post">
+					<input type="hidden" name="id" th:value="${leave.id}" />
                     <div class="alert alert-danger" th:if="${#fields.hasErrors('*')}">
                         <ul>
                             <ol th:each="err : ${#fields.errors('*')}" th:text="${err}"></ol>
@@ -34,7 +34,7 @@
 					<div>
 						<div>
 							<select class="form-control" th:field="*{jobPosition}">
-								<option th:each="jobPosition : ${T(com.manjula.eleave.employee.model.JobPosition).values()}"
+								<option th:each="jobPosition : ${T(com.manjula.eleave.leave.model.JobPosition).values()}"
 										th:value="${jobPosition}"
 										th:text="${jobPosition}">
 							</select>
@@ -43,7 +43,7 @@
 					<div>
 						<div>
 							<select class="form-control" th:field="*{role}">
-								<option th:each="role : ${T(com.manjula.eleave.employee.model.Role).values()}"
+								<option th:each="role : ${T(com.manjula.eleave.leave.model.Role).values()}"
 										th:value="${role}"
 										th:text="${role}">
 							</select>
